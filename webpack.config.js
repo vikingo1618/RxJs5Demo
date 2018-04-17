@@ -1,5 +1,6 @@
 module.exports = {
     entry: "./main",
+    //All output goes to this address
     output: { filename: "app.js" },
     module: {
         loaders: [
@@ -10,6 +11,7 @@ module.exports = {
         ]
     },
     resolve: {
+        //All ts are converted to js
         extensions: [".ts", ".js"]
     }
 }

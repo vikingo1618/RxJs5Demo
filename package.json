@@ -6,7 +6,7 @@
     "start": "webpack-dev-server --watch --inline",
     "postinstall": "typings install"
   },
-  "author": "Javier Rodriguez",
+  "author": "Elmer Homero",
   "license": "MIT",
   "dependencies": {
     "rxjs": "^5.5.2"
