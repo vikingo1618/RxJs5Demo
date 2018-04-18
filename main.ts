@@ -1,35 +1,47 @@
 import { Observable, Observer } from "rxjs";
 import { elementAt } from "rxjs/operators";
 
-let output = document.getElementById('output');
-let button = document.getElementById('button');
+let output=document.getElementById('output');
+let button=document.getElementById('button');
 
-let click = Observable.fromEvent(button,'click');
+let click=Observable.fromEvent(button,'click');
 
-function load(url: string){
-    let xhr = new XMLHttpRequest();
+function load(url:string){
 
-    xhr.addEventListener('load', () => {
-        let jsonStarwars = JSON.parse(xhr.responseText);
-        jsonStarwars.forEach(element => {
-            let div =document.createElement('div');
-            div.innerText = element.name;
-            output.appendChild(div);
-        });
+    return Observable.create(observer => {
+        
+        let xhr=new XMLHttpRequest();
+        xhr.addEventListener('load',()=>{
+        
+        if(xhr.status===200){
+            let jsonNames=JSON.parse(xhr.responseText);
+            observer.next(jsonNames);
+            observer.complete();
+        }else{
+            observer.error(xhr.statusText);
+        } 
+        
     });
 
     xhr.open('GET',url);
     xhr.send();
+
+    });
+
 }
 
-click.subscribe(
-    value => {
-        load('becarios.json');
-    },
-    error => {
-        console.log(`Error: ${error}`);
-    },
-    () => {
-        console.log('Complete');
-    }
-);
+
+
+function renderNames(jsonNames){
+    jsonNames.forEach(element => {
+        let div=document.createElement('div');
+        div.innerText=`${element.name}`;
+        output.appendChild(div);
+    });
+    let cal=Observable.from(jsonNames).filter(x => x>60);
+}
+
+
+click.flatMap(x => load('becarios.json'))
+        .subscribe((x : any) => Observable.from(x).filter((x : any) => x.grade >= 60).subscribe(
+            x => renderNames(x.name)));
