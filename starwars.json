@@ -10,5 +10,9 @@
     {
         "category": "Jedi",
         "name":"Obi Wan Kenobi"
+    },
+    {
+        "category": "Lord Sith",
+        "name":"Darth Sidious"
     }
 ]
