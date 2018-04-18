@@ -49,5 +49,5 @@ click.flatMap(x => load('becarios.json'))
             x => console.log(x.name)));
 
 clickMax.flatMap(x => load('becarios.json'))
-        .subscribe((x : any) => Observable.from(x).filter((x : any) => x.grade >= 10).subscribe(
-            x => console.log(x.name)));
+        .subscribe((x : any) => Observable.from(x).max((x : any) => x.grade).subscribe(
+            x => console.log(x.grade)));
