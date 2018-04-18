@@ -24,7 +24,7 @@ function load(url: string){
 
 click.subscribe(
     value => {
-        load('starwars.json');
+        load('becarios.json');
     },
     error => {
         console.log(`Error: ${error}`);
