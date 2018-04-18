@@ -3,8 +3,10 @@ import { elementAt } from "rxjs/operators";
 
 let output=document.getElementById('output');
 let button=document.getElementById('button');
+let buttonMax=document.getElementById('buttonMax');
 
 let click=Observable.fromEvent(button,'click');
+let clickMax =Observable.fromEvent(buttonMax,'click');
 
 function load(url:string){
 
@@ -44,4 +46,8 @@ function renderNames(jsonNames){
 
 click.flatMap(x => load('becarios.json'))
         .subscribe((x : any) => Observable.from(x).filter((x : any) => x.grade >= 60).subscribe(
-            x => renderNames(x.name)));
+            x => console.log(x.name)));
+
+clickMax.flatMap(x => load('becarios.json'))
+        .subscribe((x : any) => Observable.from(x).filter((x : any) => x.grade >= 10).subscribe(
+            x => console.log(x.name)));
