@@ -46,8 +46,8 @@ function renderNames(jsonNames){
 
 click.flatMap(x => load('becarios.json'))
         .subscribe((x : any) => Observable.from(x).filter((x : any) => x.grade >= 60).subscribe(
-            x => console.log(x.name)));
+            x => console.log(`${x.name} passed the exam.`)));
 
 clickMax.flatMap(x => load('becarios.json'))
         .subscribe((x : any) => Observable.from(x).max((x : any) => x.grade).subscribe(
-            x => console.log(x.grade)));
+            x => console.log(`Highest note is: ${x.grade}`)));
